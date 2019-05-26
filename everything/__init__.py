@@ -5,13 +5,17 @@ class module:
         self.__import = None
 
     def __getattr__(self, name):
+        
+        try:
+            return getattr(__import__(self.__mod + '.' + name), name)
+        except ModuleNotFoundError:
+            pass
+
         if not self.__import:
             self.__import = __import__(self.__mod)
 
-        if hasattr(self.__import, name):
-            return getattr(self.__import, name)
-        elif hasattr(self.__import, '__path__'):
-            return getattr(__import__(self.__mod + '.' + name), name)
+        return getattr(self.__import, name)
+            
 
     def __str__(self):
         return self.__getattr__('__str__')()
