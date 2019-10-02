@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="everything",
+    name="import-everything",
     version="0.0.1",
     author="Nikola Bebić",
     author_email="nikola.bebic99@gmail.com",
